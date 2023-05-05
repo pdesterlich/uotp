@@ -1,16 +1,27 @@
 # uotp
 
-A new Flutter project.
+the ugly one time password generator / manager
 
-## Getting Started
+## backstory
 
-This project is a starting point for a Flutter application.
+I am a developer. Or, better, i pretend to be a developer. Or, even better, someone pay me to behave like a developer. So, i am a developer.
 
-A few resources to get you started if this is your first Flutter project:
+I am definitely not a designer. I suck at UI. I usually work on backends or on business apps, where the key is "it works". So, i am not a designer.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Given this, i need an otp manager. There are plenty out there, but like all developers, none really fit my use case. Because let's face it, there isn't, there has never been, and there will never be a software that fits a developer use case.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+So, like all developers, i decided to write my own.
+
+## about uotp
+
+what uotp should be:
+- a simple otp generator / manager
+- open source
+- cross platform
+- free (with maybe one paid option, for syncronization where the user doesn't have a shared place to store the data - you know, server costs money)
+
+what uotp will surely be:
+- a collection of bad practices, bad code, bad design, bad everything
+
+what uotp wille be:
+- only time will tell
