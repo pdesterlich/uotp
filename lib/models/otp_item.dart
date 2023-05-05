@@ -1,6 +1,7 @@
 class OtpItem {
   final String name;
   final String secret;
+  String host = '';
 
-  OtpItem(this.name, this.secret);
+  OtpItem({required this.name, required this.secret, this.host = ''});
 }

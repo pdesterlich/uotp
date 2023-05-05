@@ -15,8 +15,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Future<void> _loadOtpItems() async {
     List<OtpItem> items = [];
-    items.add(OtpItem('DigitalOcean', 'test'));
-    items.add(OtpItem('GitHub', 'test2'));
+    items.add(OtpItem(
+        name: 'Moorea', secret: 'moorea', host: 'moorea.elcosistemi.net'));
+    ;
+    items.add(OtpItem(
+        name: 'DigitalOcean', secret: 'test', host: 'digitalocean.com'));
+    items.add(OtpItem(name: 'GitHub', secret: 'test2', host: 'github.com'));
+    items.sort((a, b) => a.name.compareTo(b.name));
     setState(() {
       _otpItems.clear();
       _otpItems.addAll(items);

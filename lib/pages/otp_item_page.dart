@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
 import 'package:uotp/models/otp_item.dart';
@@ -11,10 +13,32 @@ class OtpItemPage extends StatefulWidget {
 }
 
 class _OtpItemPageState extends State<OtpItemPage> {
-  String getOtp() {
-    return OTP.generateTOTPCodeString(
+  late Timer _timer;
+  String _token = '';
+  int _updatingIn = 30;
+
+  void _updateToken() {
+    var token = OTP.generateTOTPCodeString(
         widget.otpItem.secret, DateTime.now().millisecondsSinceEpoch,
         algorithm: Algorithm.SHA1, isGoogle: true, interval: 30);
+    setState(() {
+      _token = token;
+      _updatingIn = 30 - (DateTime.now().second % 30);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _updateToken();
+    _timer =
+        Timer.periodic(const Duration(seconds: 1), (timer) => _updateToken());
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -25,11 +49,27 @@ class _OtpItemPageState extends State<OtpItemPage> {
       ),
       body: Container(
         padding: const EdgeInsets.all(8),
+        width: double.infinity,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.otpItem.name),
-            Text(widget.otpItem.secret),
-            Text(getOtp()),
+            Text(
+              widget.otpItem.name,
+              style: const TextStyle(fontSize: 20),
+            ),
+            Text(widget.otpItem.host),
+            Center(
+              child: Text(
+                _token,
+                style: const TextStyle(fontSize: 40),
+              ),
+            ),
+            Center(
+              child: Text(
+                'updating in $_updatingIn seconds',
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
           ],
         ),
       ),
