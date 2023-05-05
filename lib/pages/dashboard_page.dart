@@ -18,7 +18,6 @@ class _DashboardPageState extends State<DashboardPage> {
     List<OtpItem> items = [];
     items.add(OtpItem(
         name: 'Moorea', secret: 'moorea', host: 'moorea.elcosistemi.net', details: 'p.desterlich'));
-    ;
     items.add(OtpItem(
         name: 'DigitalOcean', secret: 'test', host: 'digitalocean.com'));
     items.add(OtpItem(name: 'GitHub', secret: 'test2', host: 'github.com'));

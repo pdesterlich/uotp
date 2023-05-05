@@ -54,32 +54,9 @@ class _OtpItemPageState extends State<OtpItemPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                FutureBuilder(
-                  future: NetworkHelpers.getSiteIcon(widget.otpItem.host, 24),
-                  builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-                    if (snapshot.hasData) {
-                      return snapshot.data!;
-                    } else {
-                      return const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: Text(
-                    widget.otpItem.name,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-              ]
+            Text(
+              widget.otpItem.name,
+              style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 12,),
             Text(widget.otpItem.host),

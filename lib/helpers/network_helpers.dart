@@ -8,7 +8,7 @@ import 'package:html/dom.dart' as dom;
 class NetworkHelpers {
 
   static Future<Widget> getSiteIcon(String hostname, double size) async {
-    // print('get site icon $hostname');
+    print('get site icon $hostname');
     Uri url = Uri.https(hostname);
     http.Response response = await http.get(url);
     dom.Document document = parser.parse(response.body);
