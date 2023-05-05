@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:otp/otp.dart';
+import 'package:uotp/helpers/network_helpers.dart';
 import 'package:uotp/models/otp_item.dart';
 
 class OtpItemPage extends StatefulWidget {
@@ -48,15 +49,39 @@ class _OtpItemPageState extends State<OtpItemPage> {
         title: const Text('the Ugly OTP manager'),
       ),
       body: Container(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(12),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.otpItem.name,
-              style: const TextStyle(fontSize: 20),
+            Row(
+              children: [
+                FutureBuilder(
+                  future: NetworkHelpers.getSiteIcon(widget.otpItem.host, 24),
+                  builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data!;
+                    } else {
+                      return const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: Text(
+                    widget.otpItem.name,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+              ]
             ),
+            const SizedBox(height: 12,),
             Text(widget.otpItem.host),
             Center(
               child: Text(

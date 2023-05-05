@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uotp/models/otp_item.dart';
+import 'package:uotp/pages/insert_page.dart';
 import 'package:uotp/pages/otp_item_page.dart';
 import 'package:uotp/widgets/otp_item_row.dart';
 
@@ -16,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Future<void> _loadOtpItems() async {
     List<OtpItem> items = [];
     items.add(OtpItem(
-        name: 'Moorea', secret: 'moorea', host: 'moorea.elcosistemi.net'));
+        name: 'Moorea', secret: 'moorea', host: 'moorea.elcosistemi.net', details: 'p.desterlich'));
     ;
     items.add(OtpItem(
         name: 'DigitalOcean', secret: 'test', host: 'digitalocean.com'));
@@ -25,6 +26,14 @@ class _DashboardPageState extends State<DashboardPage> {
     setState(() {
       _otpItems.clear();
       _otpItems.addAll(items);
+    });
+  }
+
+  _addOtpItem(OtpItem value) {
+    setState(() {
+      _otpItems.add(value);
+      print('added ${value.name}');
+      _otpItems.sort((a, b) => a.name.compareTo(b.name));
     });
   }
 
@@ -61,7 +70,14 @@ class _DashboardPageState extends State<DashboardPage> {
             }),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return const InsertPage();
+            }),
+          ).then((value) => _addOtpItem(value));
+        },
         tooltip: 'add a new otp',
         child: const Icon(Icons.add),
       ),
